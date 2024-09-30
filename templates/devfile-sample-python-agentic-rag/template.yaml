@@ -7,7 +7,8 @@ metadata:
   description: Python is an interpreted,  object-oriented, high-level programming language with dynamic semantics. This sample demonstrates software supply chain security functionalty using an advanced continuous integration pipeline covering building, CVE scanning, security scanning, signatures, attestations, SLSA provenance and SBOM along with Gitops-based continuous deployment. 
   tags: ["python", "pip", "flask", "sscs", "sbom", "acs"]
 spec:
-  type: service
+  type: app
+  owner: pdettori
   # These parameters are used to generate the input form in the frontend, and are
   # used to gather input data for the execution of the template.
   parameters:
