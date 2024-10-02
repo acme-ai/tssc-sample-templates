@@ -58,7 +58,6 @@ spec:
         repoName:
           title: Repository Name
           type: string
-          default: ${{ parameters.name }}
         branch:
           title: Repository Default Branch
           type: string
@@ -166,7 +165,6 @@ spec:
         imageName:
           title: Image Name
           type: string
-          default: ${{ parameters.name }}
           ui:autofocus: true
           ui:options:
             rows: 5
