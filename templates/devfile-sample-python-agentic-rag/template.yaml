@@ -212,7 +212,10 @@ spec:
           repoSlug: '${{ parameters.imageOrg }}/${{ parameters.imageName }}'
           defaultBranch: ${{ parameters.branch }} 
           isTekton: ${{ parameters.ciType === 'tekton' }} 
-          isJenkins: ${{ parameters.ciType === 'jenkins' }} 
+          isJenkins: ${{ parameters.ciType === 'jenkins' }}
+          models:  ${{parameters.models}}
+          vectordbs: ${{parameters.vectordbs}}
+          tools: ${{parameters.tools}}
     - id: fetch-ci-skeleton
       name: Fetch CI Components
       action: fetch:template
