@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 # https://backstage.io/docs/features/software-catalog/descriptor-format#kind-template
 kind: Template
 metadata:
-  name: agentic-app
+  name: python-rag
   title: Agentic GenAI application template2
   description: Simple GenAI application template with agentic support
   tags: ["python", "pip", "flask", "sscs", "sbom", "acs", "rag", "agent", "concert"]
