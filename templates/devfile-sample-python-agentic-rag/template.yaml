@@ -2,10 +2,10 @@ apiVersion: scaffolder.backstage.io/v1beta3
 # https://backstage.io/docs/features/software-catalog/descriptor-format#kind-template
 kind: Template
 metadata:
-  name: python-rag
-  title:  Python - Agentic RAG with TAP
-  description: Python is an interpreted,  object-oriented, high-level programming language with dynamic semantics. This sample demonstrates software supply chain security functionalty using an advanced continuous integration pipeline covering building, CVE scanning, security scanning, signatures, attestations, SLSA provenance and SBOM along with Gitops-based continuous deployment. 
-  tags: ["python", "pip", "flask", "sscs", "sbom", "acs"]
+  name: agentic-app
+  title: Agentic GenAI application template2
+  description: Simple GenAI application template with agentic support
+  tags: ["python", "pip", "flask", "sscs", "sbom", "acs", "rag", "agent", "concert"]
 spec:
   type: app
   owner: pdettori
@@ -54,10 +54,11 @@ spec:
           title: Repository Owner
           type: string
           ui:help: The organization, user or project that this repo will belong to
-          
+          default: hc3-gto
         repoName:
           title: Repository Name
           type: string
+          default: '{{ parameters.name }}'
         branch:
           title: Repository Default Branch
           type: string
@@ -107,6 +108,43 @@ spec:
                   enumNames:
                     - Tekton (SLSA 3)
                     - Jenkins (SLSA 2) 
+    - title: Provide information about the models to use for this component
+      properties:
+        models:
+          title: Models
+          type: array
+          description: Models to be used in this component
+          # https://backstage.io/docs/features/software-templates/ui-options-examples/#multientitypicker
+          ui:field: MultiEntityPicker
+          ui:options:
+            allowArbitraryValues: false
+            catalogFilter:
+              - kind: Component
+                spec.type: model
+    - title: Provide information about the vector DBs to use for this component
+      properties:
+        vectordbs:
+          title: Vector DB
+          type: array
+          description: VectorDBs to be used in this component
+          ui:field: MultiEntityPicker
+          ui:options:
+            allowArbitraryValues: false
+            catalogFilter:
+              - kind: Component
+                spec.type: vectordb
+    - title: Provide information about the external tools to use for this component
+      properties:
+        tools:
+          title: Tools
+          type: array
+          description: Tools to be used in this component
+          ui:field: MultiEntityPicker
+          ui:options:
+            allowArbitraryValues: false
+            catalogFilter:
+              - kind: Component
+                spec.type: tool
     - title: Deployment information
       required:
         - imageRegistry
@@ -124,10 +162,11 @@ spec:
           title: Image Organization
           type: string
           description: The organization, user or project that this repo will belong to
-          
+          default: acme-ai
         imageName:
           title: Image Name
           type: string
+          default: '{{ parameters.name }}'
           ui:autofocus: true
           ui:options:
             rows: 5
