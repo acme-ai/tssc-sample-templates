@@ -1,0 +1,26 @@
+apiVersion: score.dev/v1b1
+containers:
+    main:
+        image: ${{values.image}}
+metadata:
+    name: ${{values.name}}
+service:
+    ports:
+        web:
+            port: 8501
+resources:
+{% for model in values.models %}
+  ${{ model  | parseEntityRef | pick('name') }}:
+    type: model
+    class:  ${{ model  | parseEntityRef | pick('name') }}
+{% endfor %}
+{% for vectordb in values.vectordbs %}
+  ${{ vectordb | parseEntityRef | pick('name') }}:
+    type: vectordb
+    class:  ${{ vectordb | parseEntityRef | pick('name') }}
+{% endfor %}
+{% for tool in values.tools %}
+  ${{ tool | parseEntityRef | pick('name') }}:
+    type: tool
+    class:  ${{ tool | parseEntityRef | pick('name') }}
+{% endfor %}
